@@ -32,6 +32,7 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<C-q>', '<C-^>', { desc = 'Switch to last accessed buffer' })
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
@@ -52,5 +53,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+vim.keymap.set('n', '<leader>hf', function()
+  require('nvim-treesitter.textobjects.move').goto_previous_start '@function.outer'
+end, { desc = 'Hop to function start' })
 
 -- vim: ts=2 sts=2 sw=2 et
